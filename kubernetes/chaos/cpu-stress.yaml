@@ -1,0 +1,18 @@
+apiVersion: chaos-mesh.org/v1alpha1
+kind: StressChaos
+metadata:
+  name: cpu-stress-test
+spec:
+  mode: one
+  selector:
+    namespaces:
+      - default
+    labelSelectors:
+      app: go-service
+  stressors:
+    cpu:
+      workers: 1
+      load: 20
+  duration: "30s"
+  scheduler:
+    cron: "@every 5m"
